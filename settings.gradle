@@ -10,7 +10,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 rootProject.name = "SafeIsolatorForAndroid"
 include ':app'
+
+include ':setup-wizard-lib'
+project(':setup-wizard-lib').projectDir = new File(rootDir, 'app/libs/SetupWizardLibrary/library')
+project(':setup-wizard-lib').buildFileName = 'standalone.gradle'

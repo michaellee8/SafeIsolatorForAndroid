@@ -6,6 +6,13 @@
         <entry key="../../../../layout/compose-model-1649420022943.xml" value="0.67" />
         <entry key="../../../../layout/compose-model-1649479193131.xml" value="0.5054151624548736" />
         <entry key="../../../../layout/compose-model-1649484401292.xml" value="0.19133574007220217" />
+        <entry key="app/src/main/res-shelter/drawable/circle_accent.xml" value="0.176" />
+        <entry key="app/src/main/res-shelter/drawable/ic_freeze_tinted.xml" value="0.176" />
+        <entry key="app/src/main/res-shelter/drawable/ic_search_tinted_24dp.xml" value="0.176" />
+        <entry key="app/src/main/res-shelter/drawable/ic_settings_tinted_24dp.xml" value="0.176" />
+        <entry key="app/src/main/res-shelter/layout/activity_main.xml" value="0.14221014492753623" />
+        <entry key="app/src/main/res-shelter/layout/activity_settings.xml" value="0.14221014492753623" />
+        <entry key="app/src/main/res-shelter/layout/app_list_item.xml" value="0.14221014492753623" />
         <entry key="app/src/main/res/layout/about.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/layout/access.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/layout/actionlog.xml" value="0.18177083333333333" />
