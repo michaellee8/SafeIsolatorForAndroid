@@ -6,6 +6,7 @@ import android.app.Application
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.VpnService
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
@@ -65,6 +66,7 @@ class SafeIsolatorViewModel(
     // Would be called from MainActivity::onActivityResult
     fun startVpn() {
         ServiceSinkhole.start("enabled", activity)
+        Log.i("SafeIsolator", "Called ServiceSinkhole::start")
     }
 
     //
