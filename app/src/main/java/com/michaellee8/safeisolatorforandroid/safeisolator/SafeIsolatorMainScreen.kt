@@ -8,7 +8,11 @@ import androidx.compose.runtime.Composable
 @Composable
 fun SafeIsolatorMainScreen(
     enableVpn: () -> Unit,
-    disableVpn: () -> Unit
+    disableVpn: () -> Unit,
+    setupWorkProfile: () -> Unit,
+    navigateToAPKDownloadSite: () -> Unit,
+    isInstalledOnWorkProfile: Boolean,
+    vpnEnabled: Boolean,
 ) {
     Column {
         Button(onClick = { enableVpn() }) {
@@ -17,5 +21,6 @@ fun SafeIsolatorMainScreen(
         Button(onClick = { disableVpn() }) {
             Text("Disable VPN")
         }
+
     }
 }

@@ -3,11 +3,13 @@ package com.michaellee8.safeisolatorforandroid.safeisolator
 import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.Application
+import android.app.admin.DevicePolicyManager
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.VpnService
 import android.util.Log
 import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
@@ -69,9 +71,24 @@ class SafeIsolatorViewModel(
         Log.i("SafeIsolator", "Called ServiceSinkhole::start")
     }
 
-    //
     fun disableVpn() {
         ServiceSinkhole.stop("switch off", getApplication(), false)
     }
 
+    val isInstalledOnWorkProfile: Boolean
+        get() = app.let { it ->
+            val devicePolicyManager =
+                it.getSystemService(AppCompatActivity.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+            val activeAdmins = devicePolicyManager.activeAdmins
+
+            activeAdmins?.any { devicePolicyManager.isProfileOwnerApp(it.packageName) } ?: false
+        }
+
+    fun setupWorkProfile() {
+
+    }
+
+    fun navigateToAPKDownloadSite() {
+
+    }
 }
