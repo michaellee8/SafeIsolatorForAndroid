@@ -13,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.michaellee8.safeisolatorforandroid.safeisolator.SafeIsolatorMainScreen
 import com.michaellee8.safeisolatorforandroid.safeisolator.SafeIsolatorViewModel
 import com.michaellee8.safeisolatorforandroid.safeisolator.SafeIsolatorViewModelFactory
 import com.michaellee8.safeisolatorforandroid.ui.theme.SafeIsolatorForAndroidTheme
@@ -42,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    SafeIsolatorMainActivityScreen(safeIsolatorViewModel = safeIsolatorViewModel)
                 }
             }
         }
@@ -66,14 +67,18 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun SafeIsolatorMainActivityScreen(safeIsolatorViewModel: SafeIsolatorViewModel) {
+    SafeIsolatorMainScreen(
+        enableVpn = safeIsolatorViewModel::enableVpn,
+        disableVpn = safeIsolatorViewModel::disableVpn
+    )
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     SafeIsolatorForAndroidTheme {
-        Greeting("Android")
+        SafeIsolatorMainScreen(enableVpn = {}, disableVpn = {})
     }
 }
