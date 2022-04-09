@@ -57,9 +57,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.michaellee8.safeisolatorforandroid.BuildConfig;
-import com.michaellee8.safeisolatorforandroid.R;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,6 +64,9 @@ import androidx.core.app.NavUtils;
 import androidx.core.util.PatternsCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.PreferenceManager;
+
+import com.michaellee8.safeisolatorforandroid.BuildConfig;
+import com.michaellee8.safeisolatorforandroid.R;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -794,8 +794,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
                 requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_CALL);
 
-                if (name != null)
-                    return false;
+                return name == null;
             }
 
         return true;
@@ -842,7 +841,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
             throw new IllegalArgumentException("Bad address");
     }
 
-    private BroadcastReceiver interactiveStateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver interactiveStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Util.logExtras(intent);
@@ -850,7 +849,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         }
     };
 
-    private BroadcastReceiver connectivityChangedReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver connectivityChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Util.logExtras(intent);
@@ -956,14 +955,14 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                     xmlExport(out);
                     return null;
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                     return ex;
                 } finally {
                     if (out != null)
                         try {
                             out.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                         }
                 }
             }
@@ -1008,20 +1007,20 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
                     return null;
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                     return ex;
                 } finally {
                     if (out != null)
                         try {
                             out.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                         }
                     if (in != null)
                         try {
                             in.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                         }
                 }
             }
@@ -1062,14 +1061,14 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                     xmlImport(in);
                     return null;
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                     return ex;
                 } finally {
                     if (in != null)
                         try {
                             in.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                         }
                 }
             }
@@ -1239,7 +1238,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         else if (uid == 9999)
             return new String[]{"nobody"};
         else {
-            String pkgs[] = getPackageManager().getPackagesForUid(uid);
+            String[] pkgs = getPackageManager().getPackagesForUid(uid);
             if (pkgs == null)
                 return new String[0];
             else
@@ -1305,7 +1304,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     }
 
     private class XmlImportHandler extends DefaultHandler {
-        private Context context;
+        private final Context context;
         public boolean enabled = false;
         public Map<String, Object> application = new HashMap<>();
         public Map<String, Object> wifi = new HashMap<>();

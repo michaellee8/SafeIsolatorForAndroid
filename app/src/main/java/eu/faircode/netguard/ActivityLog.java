@@ -43,13 +43,13 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.michaellee8.safeisolatorforandroid.R;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.NavUtils;
 import androidx.preference.PreferenceManager;
+
+import com.michaellee8.safeisolatorforandroid.R;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -76,7 +76,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
     private static final int REQUEST_PCAP = 1;
 
-    private DatabaseHelper.LogChangedListener listener = new DatabaseHelper.LogChangedListener() {
+    private final DatabaseHelper.LogChangedListener listener = new DatabaseHelper.LogChangedListener() {
         @Override
         public void onChanged() {
             runOnUiThread(new Runnable() {
@@ -152,7 +152,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
             vpn4 = InetAddress.getByName(prefs.getString("vpn4", "10.1.10.1"));
             vpn6 = InetAddress.getByName(prefs.getString("vpn6", "fd00:1:fd00:1:fd00:1:fd00:1"));
         } catch (UnknownHostException ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
         }
 
         lvLog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -176,7 +176,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                 try {
                     addr = InetAddress.getByName(daddr);
                 } catch (UnknownHostException ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                 }
 
                 String ip;
@@ -610,20 +610,20 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
                     return null;
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                     return ex;
                 } finally {
                     if (out != null)
                         try {
                             out.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                         }
                     if (in != null)
                         try {
                             in.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                         }
 
                     // Resume capture

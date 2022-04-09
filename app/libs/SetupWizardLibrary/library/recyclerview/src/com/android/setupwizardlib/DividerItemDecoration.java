@@ -21,10 +21,12 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.view.View;
+
 import androidx.annotation.IntDef;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -145,10 +147,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     // Require permission from index below to draw the divider.
     if (index < lastItemIndex) {
       final RecyclerView.ViewHolder nextHolder = parent.findViewHolderForLayoutPosition(index + 1);
-      if (!isDividerAllowedAbove(nextHolder)) {
         // Don't draw if the next view holder doesn't allow drawing above
-        return false;
-      }
+        return isDividerAllowedAbove(nextHolder);
     }
     return true;
   }

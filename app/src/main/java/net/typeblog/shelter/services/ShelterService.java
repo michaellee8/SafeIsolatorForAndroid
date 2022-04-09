@@ -17,6 +17,7 @@ import android.os.RemoteException;
 import androidx.annotation.Nullable;
 
 import com.michaellee8.safeisolatorforandroid.R;
+
 import net.typeblog.shelter.ShelterApplication;
 import net.typeblog.shelter.receivers.ShelterDeviceAdminReceiver;
 import net.typeblog.shelter.ui.DummyActivity;
@@ -46,7 +47,7 @@ public class ShelterService extends Service {
     // Note that this proxy can only start activity that is accessible to the
     // main profile and within the application itself.
     private IStartActivityProxy mStartActivityProxy = null;
-    private IShelterService.Stub mBinder = new IShelterService.Stub() {
+    private final IShelterService.Stub mBinder = new IShelterService.Stub() {
         @Override
         public void ping() {
             // Do nothing, just let the other side know we are alive

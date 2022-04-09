@@ -10,7 +10,7 @@ def DOCSDIR = "$rootDir/frameworks/opt/setupwizard/tools/docs"
 
 android.libraryVariants.all { variant ->
     if (variant.buildType.name.equals(com.android.builder.core.BuilderConstants.DEBUG)) {
-        return; // Skip debug builds.
+        return // Skip debug builds.
     }
     def suffix = variant.name.capitalize()
 

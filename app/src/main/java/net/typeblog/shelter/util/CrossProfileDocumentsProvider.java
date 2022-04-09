@@ -17,6 +17,7 @@ import android.provider.DocumentsProvider;
 import androidx.annotation.Nullable;
 
 import com.michaellee8.safeisolatorforandroid.R;
+
 import net.typeblog.shelter.services.FileShuttleService;
 import net.typeblog.shelter.services.IFileShuttleService;
 import net.typeblog.shelter.services.IFileShuttleServiceCallback;
@@ -45,12 +46,12 @@ public class CrossProfileDocumentsProvider extends DocumentsProvider {
     };
 
     private IFileShuttleService mService = null;
-    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
     // Periodic task to release the handle to the service
     // Since DocumentsProvider may persist for a long time,
     // We just release the service when idle, thus enabling the
     // system to release memory
-    private Runnable mReleaseServiceTask = this::releaseService;
+    private final Runnable mReleaseServiceTask = this::releaseService;
     private final Object mLock = new Object();
 
     private void doBindService() {

@@ -58,8 +58,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.michaellee8.safeisolatorforandroid.R;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,6 +69,8 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.michaellee8.safeisolatorforandroid.R;
 
 import java.util.List;
 
@@ -176,7 +176,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         ivQueue.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                int location[] = new int[2];
+                int[] location = new int[2];
                 actionView.getLocationOnScreen(location);
                 Toast toast = Toast.makeText(ActivityMain.this, R.string.msg_queue, Toast.LENGTH_LONG);
                 toast.setGravity(
@@ -217,7 +217,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                                 return;
                             }
                     } catch (Throwable ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                     }
 
                     boolean filter = prefs.getBoolean("filter", false);
@@ -245,7 +245,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                                                     // com.android.vpndialogs.ConfirmDialog required
                                                     startActivityForResult(prepare, REQUEST_VPN);
                                                 } catch (Throwable ex) {
-                                                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                                                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                                                     onActivityResult(REQUEST_VPN, RESULT_CANCELED, null);
                                                     prefs.edit().putBoolean("enabled", false).apply();
                                                 }
@@ -263,7 +263,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                         }
                     } catch (Throwable ex) {
                         // Prepare failed
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                         prefs.edit().putBoolean("enabled", false).apply();
                     }
 
@@ -278,7 +278,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         ivMetered.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                int location[] = new int[2];
+                int[] location = new int[2];
                 actionView.getLocationOnScreen(location);
                 Toast toast = Toast.makeText(ActivityMain.this, R.string.msg_metered, Toast.LENGTH_LONG);
                 toast.setGravity(
@@ -433,7 +433,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                         if (!IAB.isPurchased(ActivityPro.SKU_SPEED, ActivityMain.this))
                             prefs.edit().putBoolean("show_stats", false).apply();
                     } catch (Throwable ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                     } finally {
                         iab.unbind();
                     }
@@ -441,7 +441,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             }, this);
             iab.bind();
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
         }
 
         // Support
@@ -668,7 +668,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             recreate();
     }
 
-    private DatabaseHelper.AccessChangedListener accessChangedListener = new DatabaseHelper.AccessChangedListener() {
+    private final DatabaseHelper.AccessChangedListener accessChangedListener = new DatabaseHelper.AccessChangedListener() {
         @Override
         public void onChanged() {
             runOnUiThread(new Runnable() {
@@ -681,7 +681,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         }
     };
 
-    private BroadcastReceiver onRulesChanged = new BroadcastReceiver() {
+    private final BroadcastReceiver onRulesChanged = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Received " + intent);
@@ -707,7 +707,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         }
     };
 
-    private BroadcastReceiver onQueueChanged = new BroadcastReceiver() {
+    private final BroadcastReceiver onQueueChanged = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Received " + intent);
@@ -718,7 +718,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         }
     };
 
-    private BroadcastReceiver packageChangedReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver packageChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i(TAG, "Received " + intent);
@@ -1205,7 +1205,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         // Handle logcat
         view.setOnClickListener(new View.OnClickListener() {
             private short tap = 0;
-            private Toast toast = Toast.makeText(ActivityMain.this, "", Toast.LENGTH_SHORT);
+            private final Toast toast = Toast.makeText(ActivityMain.this, "", Toast.LENGTH_SHORT);
 
             @Override
             public void onClick(View view) {

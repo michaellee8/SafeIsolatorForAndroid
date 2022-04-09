@@ -26,12 +26,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.michaellee8.safeisolatorforandroid.R;
-
 import androidx.core.app.NotificationCompat;
 import androidx.preference.PreferenceManager;
 
 import com.michaellee8.safeisolatorforandroid.BuildConfig;
+import com.michaellee8.safeisolatorforandroid.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -92,7 +91,7 @@ public class ServiceExternal extends IntentService {
                     out = new FileOutputStream(tmp);
 
                     long size = 0;
-                    byte buffer[] = new byte[4096];
+                    byte[] buffer = new byte[4096];
                     int bytes;
                     while ((bytes = in.read(buffer)) != -1) {
                         out.write(buffer, 0, bytes);
@@ -111,7 +110,7 @@ public class ServiceExternal extends IntentService {
                     ServiceSinkhole.reload("hosts file download", this, false);
 
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
 
                     if (tmp.exists())
                         tmp.delete();
@@ -120,13 +119,13 @@ public class ServiceExternal extends IntentService {
                         if (out != null)
                             out.close();
                     } catch (IOException ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                     }
                     try {
                         if (in != null)
                             in.close();
                     } catch (IOException ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                     }
 
                     if (connection instanceof HttpURLConnection)

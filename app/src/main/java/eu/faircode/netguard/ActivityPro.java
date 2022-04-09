@@ -19,6 +19,8 @@ package eu.faircode.netguard;
     Copyright 2015-2019 by Marcel Bokhorst (M66B)
 */
 
+import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
+
 import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -44,13 +46,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.michaellee8.safeisolatorforandroid.R;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
-import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
+import com.michaellee8.safeisolatorforandroid.R;
 
 public class ActivityPro extends AppCompatActivity {
     private static final String TAG = "NetGuard.Pro";
@@ -215,7 +215,7 @@ public class ActivityPro extends AppCompatActivity {
                                     if (id > 0 && pi != null)
                                         startIntentSenderForResult(pi.getIntentSender(), id, new Intent(), 0, 0, 0);
                                 } catch (Throwable ex) {
-                                    Log.i(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                                    Log.i(TAG, ex + "\n" + Log.getStackTraceString(ex));
                                 }
                             }
                         };
@@ -239,13 +239,13 @@ public class ActivityPro extends AppCompatActivity {
                         btnDev2.setEnabled(true);
 
                     } catch (Throwable ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                     }
                 }
             }, this);
             iab.bind();
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
         }
     }
 
@@ -341,7 +341,7 @@ public class ActivityPro extends AppCompatActivity {
                 }
             });
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
         }
 
         ImageButton ibPaste = view.findViewById(R.id.ibPaste);

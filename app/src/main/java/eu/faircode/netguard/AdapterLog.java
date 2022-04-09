@@ -38,11 +38,11 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.michaellee8.safeisolatorforandroid.R;
-
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.preference.PreferenceManager;
+
+import com.michaellee8.safeisolatorforandroid.R;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -50,27 +50,27 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class AdapterLog extends CursorAdapter {
-    private static String TAG = "NetGuard.Log";
+    private static final String TAG = "NetGuard.Log";
 
     private boolean resolve;
     private boolean organization;
-    private int colTime;
-    private int colVersion;
-    private int colProtocol;
-    private int colFlags;
-    private int colSAddr;
-    private int colSPort;
-    private int colDAddr;
-    private int colDPort;
-    private int colDName;
-    private int colUid;
-    private int colData;
-    private int colAllowed;
-    private int colConnection;
-    private int colInteractive;
-    private int colorOn;
-    private int colorOff;
-    private int iconSize;
+    private final int colTime;
+    private final int colVersion;
+    private final int colProtocol;
+    private final int colFlags;
+    private final int colSAddr;
+    private final int colSPort;
+    private final int colDAddr;
+    private final int colDPort;
+    private final int colDName;
+    private final int colUid;
+    private final int colData;
+    private final int colAllowed;
+    private final int colConnection;
+    private final int colInteractive;
+    private final int colorOn;
+    private final int colorOff;
+    private final int iconSize;
     private InetAddress dns1 = null;
     private InetAddress dns2 = null;
     private InetAddress vpn4 = null;
@@ -111,7 +111,7 @@ public class AdapterLog extends CursorAdapter {
             vpn4 = InetAddress.getByName(prefs.getString("vpn4", "10.1.10.1"));
             vpn6 = InetAddress.getByName(prefs.getString("vpn6", "fd00:1:fd00:1:fd00:1:fd00:1"));
         } catch (UnknownHostException ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
         }
     }
 
@@ -292,7 +292,7 @@ public class AdapterLog extends CursorAdapter {
                         try {
                             return Util.getOrganization(args[0]);
                         } catch (Throwable ex) {
-                            Log.w(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Log.w(TAG, ex + "\n" + Log.getStackTraceString(ex));
                             return null;
                         }
                     }

@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.michaellee8.safeisolatorforandroid.R;
+
 import net.typeblog.shelter.services.IAppInstallCallback;
 import net.typeblog.shelter.services.IGetAppsCallback;
 import net.typeblog.shelter.services.ILoadIconCallback;
@@ -66,7 +67,7 @@ public class AppListFragment extends BaseFragment {
 
     // Cache of allowed Cross-profile widget providers
     // Only useful if this fragment manages the work profile
-    private Set<String> mCrossProfileWidgetProviders = new HashSet<>();
+    private final Set<String> mCrossProfileWidgetProviders = new HashSet<>();
 
     // Views
     private RecyclerView mList = null;
@@ -78,7 +79,7 @@ public class AppListFragment extends BaseFragment {
 
     // Receiver for Refresh events
     // used for app changes
-    private BroadcastReceiver mRefreshReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mRefreshReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             refresh();
@@ -86,7 +87,7 @@ public class AppListFragment extends BaseFragment {
     };
 
     // Receiver for context menu closed event
-    private BroadcastReceiver mContextMenuClosedReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mContextMenuClosedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             mSelectedApp = null;
@@ -94,7 +95,7 @@ public class AppListFragment extends BaseFragment {
     };
 
     // Receiver for search event
-    private BroadcastReceiver mSearchReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mSearchReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String query = intent.getStringExtra("text");

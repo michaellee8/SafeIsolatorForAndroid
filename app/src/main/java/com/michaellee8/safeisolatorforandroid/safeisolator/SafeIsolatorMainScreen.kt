@@ -11,16 +11,21 @@ fun SafeIsolatorMainScreen(
     disableVpn: () -> Unit,
     setupWorkProfile: () -> Unit,
     navigateToAPKDownloadSite: () -> Unit,
+    pickFileToTransferToWorkProfile: () -> Unit,
     isInstalledOnWorkProfile: Boolean,
     vpnEnabled: Boolean,
 ) {
     Column {
-        Button(onClick = { enableVpn() }) {
-            Text("Enable VPN")
+        if (vpnEnabled) {
+            Button(onClick = { disableVpn() }) {
+                Text("Disable VPN")
+            }
+        } else {
+            Button(onClick = { enableVpn() }) {
+                Text("Enable VPN")
+            }
         }
-        Button(onClick = { disableVpn() }) {
-            Text("Disable VPN")
-        }
+
 
     }
 }

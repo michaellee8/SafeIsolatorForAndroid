@@ -1,20 +1,16 @@
 package com.michaellee8.safeisolatorforandroid.safeisolator
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.Application
 import android.app.admin.DevicePolicyManager
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.VpnService
 import android.util.Log
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.AndroidViewModel
 import androidx.preference.PreferenceManager
 import com.michaellee8.safeisolatorforandroid.MainActivity
 import com.michaellee8.safeisolatorforandroid.MainActivity.Companion.REQUEST_VPN
@@ -28,7 +24,7 @@ object SharedPreferencesKeys {
 class SafeIsolatorViewModel(
     val app: Application,
     val activity: MainActivity,
-    val onActivityResult: (Int, Int, Intent?) -> Unit
+    val onActivityResult: (Int, Int, Intent?) -> Unit,
 ) : AndroidViewModel(app) {
 
     val prefs = PreferenceManager.getDefaultSharedPreferences(getApplication())
@@ -89,6 +85,10 @@ class SafeIsolatorViewModel(
     }
 
     fun navigateToAPKDownloadSite() {
+
+    }
+
+    fun pickFileToTransferToWorkProfile() {
 
     }
 }

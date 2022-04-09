@@ -16,6 +16,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.michaellee8.safeisolatorforandroid.R;
+
 import net.typeblog.shelter.services.IShelterService;
 import net.typeblog.shelter.util.SettingsManager;
 import net.typeblog.shelter.util.Utility;
@@ -37,7 +38,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     private static final String SETTINGS_AUTO_FREEZE_DELAY = "settings_auto_freeze_delay";
     private static final String SETTINGS_SKIP_FOREGROUND = "settings_dont_freeze_foreground";
 
-    private SettingsManager mManager = SettingsManager.getInstance();
+    private final SettingsManager mManager = SettingsManager.getInstance();
     private IShelterService mServiceWork = null;
 
     private CheckBoxPreference mPrefCrossProfileFileChooser = null;

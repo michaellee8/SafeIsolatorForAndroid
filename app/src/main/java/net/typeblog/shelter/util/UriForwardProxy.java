@@ -30,7 +30,7 @@ public class UriForwardProxy implements Parcelable {
         }
     };
 
-    private IUriOpener mOpener;
+    private final IUriOpener mOpener;
 
     private UriForwardProxy(IUriOpener opener) {
         mOpener = opener;

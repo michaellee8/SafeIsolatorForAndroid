@@ -30,9 +30,9 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 
-import com.michaellee8.safeisolatorforandroid.R;
-
 import androidx.preference.PreferenceManager;
+
+import com.michaellee8.safeisolatorforandroid.R;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -84,10 +84,10 @@ public class Rule {
     public boolean expanded = false;
 
     private static List<PackageInfo> cachePackageInfo = null;
-    private static Map<PackageInfo, String> cacheLabel = new HashMap<>();
-    private static Map<String, Boolean> cacheSystem = new HashMap<>();
-    private static Map<String, Boolean> cacheInternet = new HashMap<>();
-    private static Map<PackageInfo, Boolean> cacheEnabled = new HashMap<>();
+    private static final Map<PackageInfo, String> cacheLabel = new HashMap<>();
+    private static final Map<String, Boolean> cacheSystem = new HashMap<>();
+    private static final Map<String, Boolean> cacheInternet = new HashMap<>();
+    private static final Map<PackageInfo, Boolean> cacheEnabled = new HashMap<>();
 
     private static List<PackageInfo> getPackages(Context context) {
         if (cachePackageInfo == null) {
@@ -269,7 +269,7 @@ public class Rule {
                     eventType = xml.next();
                 }
             } catch (Throwable ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
             }
 
             // Build rule list
@@ -391,7 +391,7 @@ public class Rule {
                         listRules.add(rule);
                     }
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                 }
 
             // Sort rule list

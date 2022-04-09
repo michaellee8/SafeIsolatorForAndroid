@@ -19,8 +19,8 @@ public class SettingsManager {
         return sInstance;
     }
 
-    private LocalStorageManager mStorage = LocalStorageManager.getInstance();
-    private Context mContext;
+    private final LocalStorageManager mStorage = LocalStorageManager.getInstance();
+    private final Context mContext;
 
     private SettingsManager(Context context) {
         mContext = context;

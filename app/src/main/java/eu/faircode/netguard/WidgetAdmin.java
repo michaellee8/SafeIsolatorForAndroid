@@ -93,7 +93,7 @@ public class WidgetAdmin extends ReceiverAutostart {
                 WidgetLockdown.updateWidgets(context);
             }
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
         }
     }
 }

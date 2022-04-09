@@ -18,6 +18,7 @@ import android.os.Looper;
 import androidx.annotation.Nullable;
 
 import com.michaellee8.safeisolatorforandroid.R;
+
 import net.typeblog.shelter.receivers.ShelterDeviceAdminReceiver;
 import net.typeblog.shelter.ui.DummyActivity;
 import net.typeblog.shelter.util.SettingsManager;
@@ -38,7 +39,7 @@ public class FreezeService extends Service {
     // We don't need to run this service in another process, so the static context should
     // be sufficient for this. DummyActivity will use these static methods to add more apps
     // to the list
-    private static List<String> sAppToFreeze = new ArrayList<>();
+    private static final List<String> sAppToFreeze = new ArrayList<>();
     public static synchronized void registerAppToFreeze(String app) {
         if (!sAppToFreeze.contains(app)) {
             sAppToFreeze.add(app);
@@ -56,7 +57,7 @@ public class FreezeService extends Service {
     private static final int NOTIFICATION_ID = 0xe49c0;
 
     // The actual receiver of the screen-off event
-    private BroadcastReceiver mLockReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mLockReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             // Save usage statistics right now!
@@ -80,7 +81,7 @@ public class FreezeService extends Service {
 
     // The receiver of the screen-on event
     // Cancels the freeze job if the designated delay has not passed
-    private BroadcastReceiver mUnlockReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mUnlockReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             mHandler.removeCallbacks(mFreezeWork);
@@ -97,8 +98,8 @@ public class FreezeService extends Service {
     private long mScreenLockTime = -1;
 
     // The handler and the delayed work to handle
-    private Handler mHandler = new Handler(Looper.getMainLooper());
-    private Runnable mFreezeWork = () -> {
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Runnable mFreezeWork = () -> {
         synchronized (FreezeService.class) {
             // Cancel the unlock receiver first - the delay has passed if this work is executed
             unregisterReceiver(mUnlockReceiver);

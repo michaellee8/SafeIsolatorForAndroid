@@ -37,9 +37,9 @@ public class FileShuttleService extends Service {
     public static final long TIMEOUT = 10000;
     // Periodic task to stop the service when idle.
     // This service does not need to persist.
-    private Runnable mSuicideTask = this::suicide;
-    private Handler mHandler = new Handler(Looper.getMainLooper());
-    private IFileShuttleService.Stub mStub = new IFileShuttleService.Stub() {
+    private final Runnable mSuicideTask = this::suicide;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final IFileShuttleService.Stub mStub = new IFileShuttleService.Stub() {
         @Override
         public void ping() {
             // Dummy method

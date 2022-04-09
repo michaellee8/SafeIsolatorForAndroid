@@ -33,9 +33,9 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.michaellee8.safeisolatorforandroid.R;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.michaellee8.safeisolatorforandroid.R;
 
 import org.xmlpull.v1.XmlSerializer;
 
@@ -183,14 +183,14 @@ public class ActivityDns extends AppCompatActivity {
                     xmlExport(out);
                     return null;
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                     return ex;
                 } finally {
                     if (out != null)
                         try {
                             out.close();
                         } catch (IOException ex) {
-                            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                         }
                 }
             }

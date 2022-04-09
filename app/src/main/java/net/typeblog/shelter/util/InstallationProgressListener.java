@@ -11,10 +11,10 @@ import androidx.appcompat.app.AlertDialog;
 import com.michaellee8.safeisolatorforandroid.R;
 
 public class InstallationProgressListener extends PackageInstaller.SessionCallback {
-    private AlertDialog mDialog;
-    private ProgressBar mProgress;
+    private final AlertDialog mDialog;
+    private final ProgressBar mProgress;
     private int mSessionId;
-    private PackageInstaller mPi;
+    private final PackageInstaller mPi;
 
     // Create a listener from an activity, and show a progress dialog for the sessionId
     // Only cares about the one sessionId provided here.

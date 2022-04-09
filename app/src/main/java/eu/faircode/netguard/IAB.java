@@ -43,8 +43,8 @@ import java.util.List;
 public class IAB implements ServiceConnection {
     private static final String TAG = "NetGuard.IAB";
 
-    private Context context;
-    private Delegate delegate;
+    private final Context context;
+    private final Delegate delegate;
     private IInAppBillingService service = null;
 
     private static final int IAB_VERSION = 3;

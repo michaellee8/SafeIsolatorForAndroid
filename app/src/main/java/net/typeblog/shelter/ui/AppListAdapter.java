@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.michaellee8.safeisolatorforandroid.R;
+
 import net.typeblog.shelter.services.ILoadIconCallback;
 import net.typeblog.shelter.services.IShelterService;
 import net.typeblog.shelter.util.ApplicationInfoWrapper;
@@ -29,11 +30,11 @@ import java.util.stream.Collectors;
 
 public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView mIcon;
-        private TextView mTitle;
-        private TextView mPackage;
+        private final ImageView mIcon;
+        private final TextView mTitle;
+        private final TextView mPackage;
         // This text view shows the order of all selected items
-        private TextView mSelectOrder;
+        private final TextView mSelectOrder;
         int mIndex = -1;
         ViewHolder(View view) {
             super(view);
@@ -220,24 +221,24 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
     }
 
     // The ORIGINAL list of applications without filtering
-    private List<ApplicationInfoWrapper> mOrigList = new ArrayList<>();
+    private final List<ApplicationInfoWrapper> mOrigList = new ArrayList<>();
     // The list of applications that is ACTUALLY displayed
     // (after filtering by search query if applicable)
-    private List<ApplicationInfoWrapper> mList = new ArrayList<>();
+    private final List<ApplicationInfoWrapper> mList = new ArrayList<>();
     private String mSearchQuery = null;
-    private IShelterService mService;
-    private Drawable mDefaultIcon;
+    private final IShelterService mService;
+    private final Drawable mDefaultIcon;
     private String mLabelDisabled;
-    private Map<String, Bitmap> mIconCache = new HashMap<>();
+    private final Map<String, Bitmap> mIconCache = new HashMap<>();
     private ContextMenuHandler mContextMenuHandler = null;
     private ActionModeHandler mActionModeHandler = null;
     private ActionModeCancelHandler mActionModeCancelHandler = null;
-    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     // Multi-selection mode
     private boolean mAllowMultiSelect = false;
     private boolean mMultiSelectMode = false;
-    private List<Integer> mSelectedIndices = new ArrayList<>();
+    private final List<Integer> mSelectedIndices = new ArrayList<>();
 
     AppListAdapter(IShelterService service, Drawable defaultIcon) {
         mService = service;

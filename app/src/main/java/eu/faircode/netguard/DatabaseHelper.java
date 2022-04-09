@@ -49,9 +49,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION = 21;
 
     private static boolean once = true;
-    private static List<LogChangedListener> logChangedListeners = new ArrayList<>();
-    private static List<AccessChangedListener> accessChangedListeners = new ArrayList<>();
-    private static List<ForwardChangedListener> forwardChangedListeners = new ArrayList<>();
+    private static final List<LogChangedListener> logChangedListeners = new ArrayList<>();
+    private static final List<AccessChangedListener> accessChangedListeners = new ArrayList<>();
+    private static final List<ForwardChangedListener> forwardChangedListeners = new ArrayList<>();
 
     private static HandlerThread hthread = null;
     private static Handler handler = null;
@@ -62,8 +62,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private final static int MSG_ACCESS = 2;
     private final static int MSG_FORWARD = 3;
 
-    private SharedPreferences prefs;
-    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
+    private final SharedPreferences prefs;
+    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
     static {
         hthread = new HandlerThread("DatabaseHelper");
@@ -225,7 +225,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor = db.rawQuery("SELECT * FROM " + table + " LIMIT 0", null);
             return (cursor.getColumnIndex(column) >= 0);
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
             return false;
         } finally {
             if (cursor != null)
@@ -355,7 +355,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 throw new IllegalArgumentException(DB_NAME + " upgraded to " + oldVersion + " but required " + DB_VERSION);
 
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
         } finally {
             db.endTransaction();
         }
@@ -1129,7 +1129,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 try {
                     listener.onChanged();
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                 }
 
         } else if (msg.what == MSG_ACCESS) {
@@ -1137,7 +1137,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 try {
                     listener.onChanged();
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                 }
 
         } else if (msg.what == MSG_FORWARD) {
@@ -1145,7 +1145,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 try {
                     listener.onChanged();
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                 }
         }
     }

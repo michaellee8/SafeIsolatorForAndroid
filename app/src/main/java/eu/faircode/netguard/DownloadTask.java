@@ -47,10 +47,10 @@ import java.net.URLConnection;
 public class DownloadTask extends AsyncTask<Object, Integer, Object> {
     private static final String TAG = "NetGuard.Download";
 
-    private Context context;
-    private URL url;
-    private File file;
-    private Listener listener;
+    private final Context context;
+    private final URL url;
+    private final File file;
+    private final Listener listener;
     private PowerManager.WakeLock wakeLock;
 
     public interface Listener {
@@ -100,7 +100,7 @@ public class DownloadTask extends AsyncTask<Object, Integer, Object> {
             out = new FileOutputStream(file);
 
             long size = 0;
-            byte buffer[] = new byte[4096];
+            byte[] buffer = new byte[4096];
             int bytes;
             while (!isCancelled() && (bytes = in.read(buffer)) != -1) {
                 out.write(buffer, 0, bytes);
@@ -119,13 +119,13 @@ public class DownloadTask extends AsyncTask<Object, Integer, Object> {
                 if (out != null)
                     out.close();
             } catch (IOException ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
             }
             try {
                 if (in != null)
                     in.close();
             } catch (IOException ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
             }
 
             if (connection instanceof HttpURLConnection)
@@ -151,7 +151,7 @@ public class DownloadTask extends AsyncTask<Object, Integer, Object> {
         wakeLock.release();
         NotificationManagerCompat.from(context).cancel(ServiceSinkhole.NOTIFY_DOWNLOAD);
         if (result instanceof Throwable) {
-            Log.e(TAG, result.toString() + "\n" + Log.getStackTraceString((Throwable) result));
+            Log.e(TAG, result + "\n" + Log.getStackTraceString((Throwable) result));
             listener.onException((Throwable) result);
         } else
             listener.onCompleted();

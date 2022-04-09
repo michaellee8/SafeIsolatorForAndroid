@@ -56,12 +56,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.michaellee8.safeisolatorforandroid.BuildConfig;
-import com.michaellee8.safeisolatorforandroid.R;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.net.ConnectivityManagerCompat;
 import androidx.preference.PreferenceManager;
+
+import com.michaellee8.safeisolatorforandroid.BuildConfig;
+import com.michaellee8.safeisolatorforandroid.R;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -77,6 +77,7 @@ import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -397,7 +398,7 @@ public class Util {
             setting = pm.getApplicationEnabledSetting(info.packageName);
         } catch (IllegalArgumentException ex) {
             setting = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
-            Log.w(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.w(TAG, ex + "\n" + Log.getStackTraceString(ex));
         }
         if (setting == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
             return info.applicationInfo.enabled;
@@ -459,7 +460,7 @@ public class Util {
         try {
             return "com.android.vending".equals(context.getPackageManager().getInstallerPackageName(context.getPackageName()));
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
             return false;
         }
     }
@@ -497,7 +498,7 @@ public class Util {
                 sb.append(Integer.toString(b & 0xff, 16).toLowerCase());
             return sb.toString();
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
             return null;
         }
     }
@@ -601,7 +602,7 @@ public class Util {
                 break;
         }
         if (p == null)
-            return Integer.toString(protocol) + "/" + version;
+            return protocol + "/" + version;
         return ((brief ? b : p) + (version > 0 ? version : ""));
     }
 
@@ -662,7 +663,7 @@ public class Util {
 
     public static String md5(String text, String salt) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         // MD5
-        byte[] bytes = MessageDigest.getInstance("MD5").digest((text + salt).getBytes("UTF-8"));
+        byte[] bytes = MessageDigest.getInstance("MD5").digest((text + salt).getBytes(StandardCharsets.UTF_8));
         StringBuilder sb = new StringBuilder();
         for (byte b : bytes)
             sb.append(String.format("%02X", b));
@@ -696,7 +697,7 @@ public class Util {
         try {
             for (int i; (i = reader.read(read)) >= 0; sb.append(read, 0, i)) ;
         } catch (Throwable ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
         }
         return sb;
     }
@@ -736,7 +737,7 @@ public class Util {
             if (bug.resolveActivity(context.getPackageManager()) != null)
                 context.startActivity(bug);
         } catch (Throwable exex) {
-            Log.e(TAG, exex.toString() + "\n" + Log.getStackTraceString(exex));
+            Log.e(TAG, exex + "\n" + Log.getStackTraceString(exex));
         }
     }
 
@@ -834,7 +835,7 @@ public class Util {
                     }
                 }
         } catch (Throwable ex) {
-            sb.append(ex.toString()).append("\r\n");
+            sb.append(ex).append("\r\n");
         }
 
         if (sb.length() > 2)
@@ -901,7 +902,7 @@ public class Util {
                 try {
                     sb.append(String.format("Prepared: %B\r\n", VpnService.prepare(context) == null));
                 } catch (Throwable ex) {
-                    sb.append("Prepared: ").append((ex.toString())).append("\r\n").append(Log.getStackTraceString(ex));
+                    sb.append("Prepared: ").append((ex)).append("\r\n").append(Log.getStackTraceString(ex));
                 }
                 sb.append("\r\n");
 
@@ -938,7 +939,7 @@ public class Util {
                     sb.append("\r\n");
 
                 } catch (IOException ex) {
-                    sb.append(ex.toString()).append("\r\n");
+                    sb.append(ex).append("\r\n");
                 }
 
                 // Get settings
@@ -957,8 +958,8 @@ public class Util {
                     out.write(getLogcat().toString().getBytes());
                     out.write(getTrafficLog(context).toString().getBytes());
                 } catch (Throwable ex) {
-                    Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
-                    sb.append(ex.toString()).append("\r\n").append(Log.getStackTraceString(ex)).append("\r\n");
+                    Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
+                    sb.append(ex).append("\r\n").append(Log.getStackTraceString(ex)).append("\r\n");
                 } finally {
                     if (out != null)
                         try {
@@ -983,7 +984,7 @@ public class Util {
                     try {
                         context.startActivity(sendEmail);
                     } catch (Throwable ex) {
-                        Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                        Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
                     }
             }
         };
@@ -1053,7 +1054,7 @@ public class Util {
             Log.i(TAG, "Logcat lines=" + count);
 
         } catch (IOException ex) {
-            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+            Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
         } finally {
             if (br != null)
                 try {
@@ -1070,7 +1071,7 @@ public class Util {
                 try {
                     process1.destroy();
                 } catch (Throwable ex) {
-                    Log.w(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                    Log.w(TAG, ex + "\n" + Log.getStackTraceString(ex));
                 }
         }
         return builder;

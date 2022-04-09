@@ -30,7 +30,7 @@ public class ResourceRecord {
     public String Resource;
     public int TTL;
 
-    private static DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
+    private static final DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
 
     public ResourceRecord() {
     }

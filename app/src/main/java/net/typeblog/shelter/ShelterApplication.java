@@ -30,7 +30,7 @@ public class ShelterApplication extends Application {
     }
 
     public void bindFileShuttleService(ServiceConnection conn) {
-        unbindFileShuttleService();;
+        unbindFileShuttleService();
         Intent intent = new Intent(getApplicationContext(), FileShuttleService.class);
         bindService(intent, conn, Context.BIND_AUTO_CREATE);
         mFileShuttleServiceConnection = conn;

@@ -21,7 +21,7 @@ package eu.faircode.netguard;
 
 public class Version implements Comparable<Version> {
 
-    private String version;
+    private final String version;
 
     public Version(String version) {
         this.version = version.replace("-beta", "");

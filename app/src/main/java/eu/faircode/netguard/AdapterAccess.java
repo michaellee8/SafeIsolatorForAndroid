@@ -36,31 +36,31 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.michaellee8.safeisolatorforandroid.R;
-
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
+
+import com.michaellee8.safeisolatorforandroid.R;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 
 public class AdapterAccess extends CursorAdapter {
-    private int colVersion;
-    private int colProtocol;
-    private int colDaddr;
-    private int colDPort;
-    private int colTime;
-    private int colAllowed;
-    private int colBlock;
-    private int colCount;
-    private int colSent;
-    private int colReceived;
-    private int colConnections;
+    private final int colVersion;
+    private final int colProtocol;
+    private final int colDaddr;
+    private final int colDPort;
+    private final int colTime;
+    private final int colAllowed;
+    private final int colBlock;
+    private final int colCount;
+    private final int colSent;
+    private final int colReceived;
+    private final int colConnections;
 
-    private int colorText;
-    private int colorOn;
-    private int colorOff;
+    private final int colorText;
+    private final int colorOn;
+    private final int colorOff;
 
     public AdapterAccess(Context context, Cursor cursor) {
         super(context, cursor, 0);

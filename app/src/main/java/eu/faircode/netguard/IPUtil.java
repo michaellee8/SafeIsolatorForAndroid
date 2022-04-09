@@ -113,7 +113,7 @@ public class IPUtil {
                 this.address = InetAddress.getByName(ip);
                 this.prefix = prefix;
             } catch (UnknownHostException ex) {
-                Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+                Log.e(TAG, ex + "\n" + Log.getStackTraceString(ex));
             }
         }
 

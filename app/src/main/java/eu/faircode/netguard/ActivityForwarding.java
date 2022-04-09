@@ -37,10 +37,10 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.michaellee8.safeisolatorforandroid.R;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.michaellee8.safeisolatorforandroid.R;
 
 import java.net.InetAddress;
 import java.util.List;
@@ -51,7 +51,7 @@ public class ActivityForwarding extends AppCompatActivity {
     private AdapterForwarding adapter;
     private AlertDialog dialog = null;
 
-    private DatabaseHelper.ForwardChangedListener listener = new DatabaseHelper.ForwardChangedListener() {
+    private final DatabaseHelper.ForwardChangedListener listener = new DatabaseHelper.ForwardChangedListener() {
         @Override
         public void onChanged() {
             runOnUiThread(new Runnable() {

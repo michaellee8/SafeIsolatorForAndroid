@@ -16,12 +16,14 @@
 
 package com.android.setupwizardlib.template;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.Log;
 import android.widget.AbsListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.setupwizardlib.template.RequireScrollMixin.ScrollHandlingDelegate;
 
 /**
@@ -73,10 +75,6 @@ public class ListViewScrollHandlingDelegate
   @Override
   public void onScroll(
       AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-    if (firstVisibleItem + visibleItemCount >= totalItemCount) {
-      requireScrollMixin.notifyScrollabilityChange(false);
-    } else {
-      requireScrollMixin.notifyScrollabilityChange(true);
-    }
+      requireScrollMixin.notifyScrollabilityChange(firstVisibleItem + visibleItemCount < totalItemCount);
   }
 }

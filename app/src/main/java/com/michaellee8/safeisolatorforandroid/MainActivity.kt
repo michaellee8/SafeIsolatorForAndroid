@@ -9,7 +9,6 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -70,7 +69,12 @@ class MainActivity : ComponentActivity() {
 fun SafeIsolatorMainActivityScreen(safeIsolatorViewModel: SafeIsolatorViewModel) {
     SafeIsolatorMainScreen(
         enableVpn = safeIsolatorViewModel::enableVpn,
-        disableVpn = safeIsolatorViewModel::disableVpn
+        disableVpn = safeIsolatorViewModel::disableVpn,
+        setupWorkProfile = safeIsolatorViewModel::setupWorkProfile,
+        navigateToAPKDownloadSite = safeIsolatorViewModel::navigateToAPKDownloadSite,
+        pickFileToTransferToWorkProfile = safeIsolatorViewModel::pickFileToTransferToWorkProfile,
+        vpnEnabled = safeIsolatorViewModel.vpnEnabled,
+        isInstalledOnWorkProfile = safeIsolatorViewModel.isInstalledOnWorkProfile,
     )
 }
 
@@ -79,6 +83,14 @@ fun SafeIsolatorMainActivityScreen(safeIsolatorViewModel: SafeIsolatorViewModel)
 @Composable
 fun DefaultPreview() {
     SafeIsolatorForAndroidTheme {
-        SafeIsolatorMainScreen(enableVpn = {}, disableVpn = {})
+        SafeIsolatorMainScreen(
+            enableVpn = {},
+            disableVpn = {},
+            setupWorkProfile = {},
+            navigateToAPKDownloadSite = {},
+            pickFileToTransferToWorkProfile = {},
+            vpnEnabled = false,
+            isInstalledOnWorkProfile = true,
+        )
     }
 }

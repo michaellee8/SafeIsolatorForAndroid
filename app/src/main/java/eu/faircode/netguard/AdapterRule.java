@@ -61,8 +61,6 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.michaellee8.safeisolatorforandroid.R;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -73,6 +71,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.request.RequestOptions;
+import com.michaellee8.safeisolatorforandroid.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -82,22 +81,22 @@ import java.util.List;
 public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> implements Filterable {
     private static final String TAG = "NetGuard.Adapter";
 
-    private View anchor;
-    private LayoutInflater inflater;
+    private final View anchor;
+    private final LayoutInflater inflater;
     private RecyclerView rv;
-    private int colorText;
-    private int colorChanged;
-    private int colorOn;
-    private int colorOff;
-    private int colorGrayed;
-    private int iconSize;
+    private final int colorText;
+    private final int colorChanged;
+    private final int colorOn;
+    private final int colorOff;
+    private final int colorGrayed;
+    private final int iconSize;
     private boolean wifiActive = true;
     private boolean otherActive = true;
     private boolean live = true;
     private List<Rule> listAll = new ArrayList<>();
     private List<Rule> listFiltered = new ArrayList<>();
 
-    private List<String> messaging = Arrays.asList(
+    private final List<String> messaging = Arrays.asList(
             "com.discord",
             "com.facebook.mlite",
             "com.facebook.orca",
@@ -109,7 +108,7 @@ public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> im
             "com.whatsapp.w4b"
     );
 
-    private List<String> download = Arrays.asList(
+    private final List<String> download = Arrays.asList(
             "com.google.android.youtube"
     );
 

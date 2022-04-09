@@ -33,7 +33,7 @@ public class Usage {
     public long Sent;
     public long Received;
 
-    private static DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
+    private static final DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
 
     @Override
     public String toString() {
