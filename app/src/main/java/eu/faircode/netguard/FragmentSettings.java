@@ -22,6 +22,8 @@ package eu.faircode.netguard;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
+import com.michaellee8.safeisolatorforandroid.R;
+
 public class FragmentSettings extends PreferenceFragment {
 
     @Override

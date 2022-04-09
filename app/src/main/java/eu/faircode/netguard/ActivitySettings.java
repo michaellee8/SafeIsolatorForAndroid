@@ -57,6 +57,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.michaellee8.safeisolatorforandroid.BuildConfig;
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

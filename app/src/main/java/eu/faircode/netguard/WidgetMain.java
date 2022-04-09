@@ -29,6 +29,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.preference.PreferenceManager;
 
 public class WidgetMain extends AppWidgetProvider {

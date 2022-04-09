@@ -33,6 +33,8 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.xmlpull.v1.XmlSerializer;

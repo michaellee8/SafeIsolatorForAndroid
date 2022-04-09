@@ -29,6 +29,8 @@ import android.service.quicksettings.TileService;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.preference.PreferenceManager;
 
 @TargetApi(Build.VERSION_CODES.N)

@@ -29,6 +29,8 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.preference.PreferenceManager;
 
 import java.text.SimpleDateFormat;

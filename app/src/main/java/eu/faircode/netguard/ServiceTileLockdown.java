@@ -28,6 +28,8 @@ import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.util.Log;
 
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.preference.PreferenceManager;
 
 @TargetApi(Build.VERSION_CODES.N)

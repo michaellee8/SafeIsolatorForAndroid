@@ -58,6 +58,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -111,6 +113,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppThemeTeal);
         Log.i(TAG, "Create version=" + Util.getSelfVersionName(this) + "/" + Util.getSelfVersionCode(this));
         Util.logExtras(getIntent());
 
@@ -305,7 +308,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
         // Swipe to refresh
         TypedValue tv = new TypedValue();
-        getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
+        getTheme().resolveAttribute(androidx.preference.R.attr.colorPrimary, tv, true);
         swipeRefresh = findViewById(R.id.swipeRefresh);
         swipeRefresh.setColorSchemeColors(Color.WHITE, Color.WHITE, Color.WHITE);
         swipeRefresh.setProgressBackgroundColorSchemeColor(tv.data);

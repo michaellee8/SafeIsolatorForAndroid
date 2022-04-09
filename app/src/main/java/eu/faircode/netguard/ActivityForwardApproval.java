@@ -28,6 +28,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.michaellee8.safeisolatorforandroid.R;
+
 import java.net.InetAddress;
 
 public class ActivityForwardApproval extends Activity {

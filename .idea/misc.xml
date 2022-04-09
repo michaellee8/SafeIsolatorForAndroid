@@ -5,7 +5,10 @@
       <map>
         <entry key="../../../../layout/compose-model-1649420022943.xml" value="0.67" />
         <entry key="../../../../layout/compose-model-1649479193131.xml" value="0.5054151624548736" />
+        <entry key="app/src/main/res/layout/about.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/layout/access.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/actionlog.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/actionmain.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/layout/android.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/layout/challenge.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/layout/dns.xml" value="0.18177083333333333" />

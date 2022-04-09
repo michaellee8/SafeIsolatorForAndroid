@@ -61,6 +61,8 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;

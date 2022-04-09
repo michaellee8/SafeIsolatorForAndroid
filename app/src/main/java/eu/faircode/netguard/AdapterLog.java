@@ -38,6 +38,8 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.preference.PreferenceManager;

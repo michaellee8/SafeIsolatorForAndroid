@@ -26,8 +26,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.core.app.NotificationCompat;
 import androidx.preference.PreferenceManager;
+
+import com.michaellee8.safeisolatorforandroid.BuildConfig;
 
 import java.io.File;
 import java.io.FileOutputStream;

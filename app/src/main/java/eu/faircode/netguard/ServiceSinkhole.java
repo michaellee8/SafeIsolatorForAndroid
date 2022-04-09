@@ -70,6 +70,9 @@ import android.util.Pair;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
 
+import com.michaellee8.safeisolatorforandroid.BuildConfig;
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -1105,7 +1108,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             PendingIntent pi = PendingIntent.getActivity(ServiceSinkhole.this, 0, main, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
             TypedValue tv = new TypedValue();
-            getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
+            getTheme().resolveAttribute(androidx.preference.R.attr.colorPrimary, tv, true);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(ServiceSinkhole.this, "notify");
             builder.setWhen(when)
                     .setSmallIcon(R.drawable.ic_equalizer_white_24dp)
@@ -2315,7 +2318,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             PendingIntent pi = PendingIntent.getActivity(this, uid, main, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
             TypedValue tv = new TypedValue();
-            getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
+            getTheme().resolveAttribute(androidx.preference.R.attr.colorPrimary, tv, true);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify");
             builder.setSmallIcon(R.drawable.ic_security_white_24dp)
                     .setContentIntent(pi)
@@ -2799,7 +2802,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         PendingIntent pi = PendingIntent.getActivity(this, 0, main, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
         TypedValue tv = new TypedValue();
-        getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
+        getTheme().resolveAttribute(androidx.preference.R.attr.colorPrimary, tv, true);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "foreground");
         builder.setSmallIcon(isLockedDown(last_metered) ? R.drawable.ic_lock_outline_white_24dp : R.drawable.ic_security_white_24dp)
                 .setContentIntent(pi)
@@ -2863,7 +2866,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         PendingIntent pi = PendingIntent.getActivity(this, 0, main, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
         TypedValue tv = new TypedValue();
-        getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
+        getTheme().resolveAttribute(androidx.preference.R.attr.colorPrimary, tv, true);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "foreground");
         builder.setSmallIcon(R.drawable.ic_security_white_24dp)
                 .setContentIntent(pi)
@@ -3082,7 +3085,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
         PendingIntent pi = PendingIntent.getActivity(this, 0, download, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
         TypedValue tv = new TypedValue();
-        getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
+        getTheme().resolveAttribute(androidx.preference.R.attr.colorPrimary, tv, true);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "notify");
         builder.setSmallIcon(R.drawable.ic_security_white_24dp)
                 .setContentTitle(name)

@@ -56,6 +56,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.michaellee8.safeisolatorforandroid.BuildConfig;
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.net.ConnectivityManagerCompat;
 import androidx.preference.PreferenceManager;
@@ -529,7 +532,7 @@ public class Util {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private static void setTaskColor(Context context) {
         TypedValue tv = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorPrimary, tv, true);
+        context.getTheme().resolveAttribute(androidx.preference.R.attr.colorPrimary, tv, true);
         ((Activity) context).setTaskDescription(new ActivityManager.TaskDescription(null, null, tv.data));
     }
 

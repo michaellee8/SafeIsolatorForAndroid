@@ -30,6 +30,8 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 
+import com.michaellee8.safeisolatorforandroid.R;
+
 import androidx.preference.PreferenceManager;
 
 import org.xmlpull.v1.XmlPullParser;
