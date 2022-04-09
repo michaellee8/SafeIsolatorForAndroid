@@ -5,6 +5,16 @@
       <map>
         <entry key="../../../../layout/compose-model-1649420022943.xml" value="0.67" />
         <entry key="../../../../layout/compose-model-1649479193131.xml" value="0.5054151624548736" />
+        <entry key="app/src/main/res/layout/access.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/android.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/challenge.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/dns.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/forward.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/forwardadd.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/log.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/main.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/pro.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/xposed.xml" value="0.18177083333333333" />
       </map>
     </option>
   </component>
