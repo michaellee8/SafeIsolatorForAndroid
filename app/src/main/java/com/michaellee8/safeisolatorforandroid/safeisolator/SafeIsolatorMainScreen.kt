@@ -7,8 +7,7 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun SafeIsolatorMainScreen(
-    enableVpn: () -> Unit,
-    disableVpn: () -> Unit,
+    onVpnEnabledChange: (Boolean) -> Unit,
     setupWorkProfile: () -> Unit,
     navigateToAPKDownloadSite: () -> Unit,
     pickFileToTransferToWorkProfile: () -> Unit,
@@ -32,11 +31,11 @@ fun SafeIsolatorMainScreen(
         }
         if (isInstalledOnWorkProfile) {
             if (vpnEnabled) {
-                Button(onClick = { disableVpn() }) {
+                Button(onClick = { onVpnEnabledChange(false) }) {
                     Text("Disable VPN")
                 }
             } else {
-                Button(onClick = { enableVpn() }) {
+                Button(onClick = { onVpnEnabledChange(true) }) {
                     Text("Enable VPN")
                 }
             }

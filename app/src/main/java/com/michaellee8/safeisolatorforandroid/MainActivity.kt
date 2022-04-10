@@ -83,7 +83,7 @@ class MainActivity : ComponentActivity() {
         }
 
 
-    class ProfileProvisionContract() :
+    class ProfileProvisionContract :
         ActivityResultContract<Void?, Boolean?>() {
 
         override fun createIntent(context: Context, input: Void?): Intent {
@@ -119,8 +119,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun SafeIsolatorMainActivityScreen(safeIsolatorViewModel: SafeIsolatorViewModel) {
     SafeIsolatorMainScreen(
-        enableVpn = safeIsolatorViewModel::enableVpn,
-        disableVpn = safeIsolatorViewModel::disableVpn,
+        onVpnEnabledChange = safeIsolatorViewModel::onVpnEnabledChange,
         setupWorkProfile = safeIsolatorViewModel::setupWorkProfile,
         navigateToAPKDownloadSite = safeIsolatorViewModel::navigateToAPKDownloadSite,
         pickFileToTransferToWorkProfile = safeIsolatorViewModel::pickFileToTransferToWorkProfile,
@@ -136,8 +135,7 @@ fun SafeIsolatorMainActivityScreen(safeIsolatorViewModel: SafeIsolatorViewModel)
 fun DefaultPreview() {
     SafeIsolatorForAndroidTheme {
         SafeIsolatorMainScreen(
-            enableVpn = {},
-            disableVpn = {},
+            onVpnEnabledChange = {},
             setupWorkProfile = {},
             navigateToAPKDownloadSite = {},
             pickFileToTransferToWorkProfile = {},

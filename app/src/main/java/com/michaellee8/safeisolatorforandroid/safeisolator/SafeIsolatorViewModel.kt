@@ -43,6 +43,7 @@ class SafeIsolatorViewModel(
     var isInternetReachable by mutableStateOf(true)
 
     fun onVpnEnabledChange(value: Boolean) {
+        Log.d("SafeIsolatorViewModel", "$vpnEnabled $value")
         if (vpnEnabled != value) {
             vpnEnabled = value
             prefs.edit().putBoolean(SharedPreferencesKeys.ENABLED, value).apply()
