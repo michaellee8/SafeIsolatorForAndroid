@@ -3,7 +3,6 @@ package net.typeblog.shelter.ui;
 import android.Manifest;
 import android.app.Activity;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -16,17 +15,14 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.StrictMode;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import com.michaellee8.safeisolatorforandroid.R;
-import net.typeblog.shelter.ShelterApplication;
+import com.michaellee8.safeisolatorforandroid.SafeIsolatorAppliction;
+
 import net.typeblog.shelter.receivers.ShelterDeviceAdminReceiver;
 import net.typeblog.shelter.services.FreezeService;
 import net.typeblog.shelter.services.IAppInstallCallback;
@@ -249,7 +245,7 @@ public class DummyActivity extends Activity {
     private void actionStartService() {
         // This needs to be foreground because this activity won't be able to hold
         // the ServiceConnection to it.
-        ((ShelterApplication) getApplication()).bindShelterService(new ServiceConnection() {
+        ((SafeIsolatorAppliction) getApplication()).bindShelterService(new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 Intent data = new Intent();
@@ -555,7 +551,7 @@ public class DummyActivity extends Activity {
     }
 
     private void doStartFileShuttle() {
-        ((ShelterApplication) getApplication()).bindFileShuttleService(new ServiceConnection() {
+        ((SafeIsolatorAppliction) getApplication()).bindFileShuttleService(new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 IFileShuttleService shuttle = IFileShuttleService.Stub.asInterface(service);

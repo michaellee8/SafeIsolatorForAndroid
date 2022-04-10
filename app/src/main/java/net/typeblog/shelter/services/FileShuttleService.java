@@ -18,7 +18,8 @@ import android.webkit.MimeTypeMap;
 
 import androidx.annotation.Nullable;
 
-import net.typeblog.shelter.ShelterApplication;
+import com.michaellee8.safeisolatorforandroid.SafeIsolatorAppliction;
+
 import net.typeblog.shelter.util.CrossProfileDocumentsProvider;
 import net.typeblog.shelter.util.Utility;
 
@@ -210,7 +211,7 @@ public class FileShuttleService extends Service {
 
     private void suicide() {
         mHandler.removeCallbacks(mSuicideTask);
-        ((ShelterApplication) getApplication()).unbindFileShuttleService();
+        ((SafeIsolatorAppliction) getApplication()).unbindFileShuttleService();
         stopSelf();
     }
 

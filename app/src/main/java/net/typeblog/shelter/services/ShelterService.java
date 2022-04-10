@@ -17,8 +17,8 @@ import android.os.RemoteException;
 import androidx.annotation.Nullable;
 
 import com.michaellee8.safeisolatorforandroid.R;
+import com.michaellee8.safeisolatorforandroid.SafeIsolatorAppliction;
 
-import net.typeblog.shelter.ShelterApplication;
 import net.typeblog.shelter.receivers.ShelterDeviceAdminReceiver;
 import net.typeblog.shelter.ui.DummyActivity;
 import net.typeblog.shelter.util.ApplicationInfoWrapper;
@@ -63,7 +63,7 @@ public class ShelterService extends Service {
 
                 }
 
-                ((ShelterApplication) getApplication()).unbindShelterService();
+                ((SafeIsolatorAppliction) getApplication()).unbindShelterService();
 
                 if (kill && !(mIsProfileOwner && FreezeService.hasPendingAppToFreeze())) {
                     // Just kill the entire process if this signal is received and the process has nothing to do

@@ -18,7 +18,6 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -29,9 +28,9 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-
 import com.michaellee8.safeisolatorforandroid.R;
-import net.typeblog.shelter.ShelterApplication;
+import com.michaellee8.safeisolatorforandroid.SafeIsolatorAppliction;
+
 import net.typeblog.shelter.services.IAppInstallCallback;
 import net.typeblog.shelter.services.IShelterService;
 import net.typeblog.shelter.services.IStartActivityProxy;
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         // Bind to the service provided by this app in main user
         // The service in main profile doesn't need to be foreground
         // because this activity will hold a ServiceConnection to the service
-        ((ShelterApplication) getApplication()).bindShelterService(new ServiceConnection() {
+        ((SafeIsolatorAppliction) getApplication()).bindShelterService(new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 mServiceMain = IShelterService.Stub.asInterface(service);
