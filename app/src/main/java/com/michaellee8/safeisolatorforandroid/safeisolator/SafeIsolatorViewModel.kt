@@ -4,6 +4,8 @@ import android.app.Activity.RESULT_OK
 import android.app.Application
 import android.app.admin.DevicePolicyManager
 import android.content.Intent
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.net.VpnService
 import android.os.Handler
 import android.util.Log
@@ -20,10 +22,12 @@ import eu.faircode.netguard.ServiceSinkhole
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.typeblog.shelter.util.ApplicationInfoWrapper
 import net.typeblog.shelter.util.AuthenticationUtility
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets
+import java.util.stream.Collectors
 
 object SharedPreferencesKeys {
     const val ENABLED = "enabled"
@@ -145,11 +149,43 @@ class SafeIsolatorViewModel(
         activity.mProvisionProfile.launch(null)
     }
 
+    fun getInstalledApps(): List<ApplicationInfoWrapper> {
+        val pmFlags =
+            PackageManager.MATCH_DISABLED_COMPONENTS or PackageManager.MATCH_UNINSTALLED_PACKAGES
+        val mPackageManager = app.packageManager
+        val list = mPackageManager.getInstalledApplications(pmFlags)
+            .stream()
+            .filter { it: ApplicationInfo -> it.packageName != app.packageName }
+            .map { info: ApplicationInfo? ->
+                ApplicationInfoWrapper(info)
+            }
+            .sorted { x: ApplicationInfoWrapper, y: ApplicationInfoWrapper ->
+                // Sort hidden apps at the last
+                if (x.isHidden && !y.isHidden) {
+                    return@sorted 1
+                } else if (!x.isHidden && y.isHidden) {
+                    return@sorted -1
+                } else {
+                    return@sorted x.label.compareTo(y.label)
+                }
+            }
+            .collect(Collectors.toList())
+        return list
+    }
+
+    fun installApk() {
+        activity.startInstallApk()
+    }
+
     fun navigateToAPKDownloadSite() {
 
     }
 
     fun pickFileToTransferToWorkProfile() {
+        installApk()
+    }
 
+    fun transferChromeToWorkProfile() {
+        activity.installChromeToWorkProfile()
     }
 }

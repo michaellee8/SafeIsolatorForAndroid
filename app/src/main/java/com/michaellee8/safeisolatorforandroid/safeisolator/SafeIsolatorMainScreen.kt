@@ -14,6 +14,7 @@ fun SafeIsolatorMainScreen(
     isInstalledOnWorkProfile: Boolean,
     vpnEnabled: Boolean,
     isInternetReachable: Boolean,
+    transferChromeToWorkProfile: () -> Unit,
 ) {
     Column {
         if (isInstalledOnWorkProfile) {
