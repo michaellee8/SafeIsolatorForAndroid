@@ -75,6 +75,7 @@ fun SafeIsolatorMainActivityScreen(safeIsolatorViewModel: SafeIsolatorViewModel)
         pickFileToTransferToWorkProfile = safeIsolatorViewModel::pickFileToTransferToWorkProfile,
         vpnEnabled = safeIsolatorViewModel.vpnEnabled,
         isInstalledOnWorkProfile = safeIsolatorViewModel.isInstalledOnWorkProfile,
+        isInternetReachable = safeIsolatorViewModel.isInternetReachable
     )
 }
 
@@ -91,6 +92,7 @@ fun DefaultPreview() {
             pickFileToTransferToWorkProfile = {},
             vpnEnabled = false,
             isInstalledOnWorkProfile = true,
+            isInternetReachable = true
         )
     }
 }

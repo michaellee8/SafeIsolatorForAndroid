@@ -14,8 +14,14 @@ fun SafeIsolatorMainScreen(
     pickFileToTransferToWorkProfile: () -> Unit,
     isInstalledOnWorkProfile: Boolean,
     vpnEnabled: Boolean,
+    isInternetReachable: Boolean,
 ) {
     Column {
+        if (isInternetReachable) {
+            Text(text = "Internet is currently rechable.")
+        } else {
+            Text(text = "Blocking is working! Internet is not reachable.")
+        }
         if (isInstalledOnWorkProfile) {
             Text(text = "Running in Work Profile.")
             Text(text = "1. Setup VPN.")

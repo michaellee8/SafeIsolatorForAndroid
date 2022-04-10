@@ -5,6 +5,7 @@ import android.app.Application
 import android.app.admin.DevicePolicyManager
 import android.content.Intent
 import android.net.VpnService
+import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.getValue
@@ -15,6 +16,7 @@ import androidx.preference.PreferenceManager
 import com.michaellee8.safeisolatorforandroid.MainActivity
 import com.michaellee8.safeisolatorforandroid.MainActivity.Companion.REQUEST_VPN
 import eu.faircode.netguard.ServiceSinkhole
+import java.net.InetAddress
 
 object SharedPreferencesKeys {
     const val ENABLED = "enabled"
@@ -31,6 +33,8 @@ class SafeIsolatorViewModel(
 
     var vpnEnabled by mutableStateOf(prefs.getBoolean(SharedPreferencesKeys.ENABLED, false))
 
+    var isInternetReachable by mutableStateOf(isInternetAvailable)
+
     fun onVpnEnabledChange(value: Boolean) {
         if (vpnEnabled != value) {
             vpnEnabled = value
@@ -41,6 +45,7 @@ class SafeIsolatorViewModel(
                 disableVpn()
             }
         }
+        isInternetReachable = isInternetAvailable
     }
 
     init {
@@ -50,6 +55,17 @@ class SafeIsolatorViewModel(
             }
         }
         prefs.edit().putBoolean(SharedPreferencesKeys.LOCKDOWN, true).apply()
+
+        val timerHandler = Handler()
+
+        val refreshIsInternetReachableRunnable = object : Runnable {
+            override fun run() {
+                isInternetReachable = isInternetAvailable
+                timerHandler.postDelayed(this, 3000)
+            }
+        }
+
+        timerHandler.post(refreshIsInternetReachableRunnable)
     }
 
     fun enableVpn() {
@@ -78,6 +94,17 @@ class SafeIsolatorViewModel(
             val activeAdmins = devicePolicyManager.activeAdmins
 
             activeAdmins?.any { devicePolicyManager.isProfileOwnerApp(it.packageName) } ?: false
+        }
+
+    val isInternetAvailable: Boolean
+        get() {
+            try {
+                val ipAddr = InetAddress.getByName("google.com")
+                Log.d("SafeIsolatorViewModel", "isInternetAvailable: ipAddr: ${ipAddr.hostAddress}")
+                return !ipAddr.equals("")
+            } catch (e: Exception) {
+                return false
+            }
         }
 
     fun setupWorkProfile() {
