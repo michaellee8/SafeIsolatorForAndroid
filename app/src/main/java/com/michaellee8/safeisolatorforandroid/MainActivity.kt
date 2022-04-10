@@ -279,7 +279,7 @@ class MainActivity : ComponentActivity() {
 
     fun installChromeToWorkProfile() {
         val chromeApp = safeIsolatorViewModel.getInstalledApps().findLast {
-            it.info.packageName == "com.android.chrome"
+            it.packageName == "com.android.chrome"
         }
         if (chromeApp == null) {
             Log.e("SafeIsolatorMainActivity", "Chrome App is not round")
