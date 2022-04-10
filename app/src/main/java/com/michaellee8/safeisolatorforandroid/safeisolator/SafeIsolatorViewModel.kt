@@ -159,16 +159,6 @@ class SafeIsolatorViewModel(
             .map { info: ApplicationInfo? ->
                 ApplicationInfoWrapper(info)
             }
-            .sorted { x: ApplicationInfoWrapper, y: ApplicationInfoWrapper ->
-                // Sort hidden apps at the last
-                if (x.isHidden && !y.isHidden) {
-                    return@sorted 1
-                } else if (!x.isHidden && y.isHidden) {
-                    return@sorted -1
-                } else {
-                    return@sorted x.label.compareTo(y.label)
-                }
-            }
             .collect(Collectors.toList())
         return list
     }
