@@ -12,11 +12,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import com.michaellee8.safeisolatorforandroid.MainActivity
 import com.michaellee8.safeisolatorforandroid.MainActivity.Companion.REQUEST_VPN
 import eu.faircode.netguard.ServiceSinkhole
-import java.net.InetAddress
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.net.HttpURLConnection
+import java.net.URL
+import java.nio.charset.StandardCharsets
 
 object SharedPreferencesKeys {
     const val ENABLED = "enabled"
@@ -33,7 +39,7 @@ class SafeIsolatorViewModel(
 
     var vpnEnabled by mutableStateOf(prefs.getBoolean(SharedPreferencesKeys.ENABLED, false))
 
-    var isInternetReachable by mutableStateOf(isInternetAvailable)
+    var isInternetReachable by mutableStateOf(true)
 
     fun onVpnEnabledChange(value: Boolean) {
         if (vpnEnabled != value) {
@@ -45,7 +51,6 @@ class SafeIsolatorViewModel(
                 disableVpn()
             }
         }
-        isInternetReachable = isInternetAvailable
     }
 
     init {
@@ -60,7 +65,7 @@ class SafeIsolatorViewModel(
 
         val refreshIsInternetReachableRunnable = object : Runnable {
             override fun run() {
-                isInternetReachable = isInternetAvailable
+                performAndScheduleInternetCheck()
                 timerHandler.postDelayed(this, 3000)
             }
         }
@@ -96,16 +101,38 @@ class SafeIsolatorViewModel(
             activeAdmins?.any { devicePolicyManager.isProfileOwnerApp(it.packageName) } ?: false
         }
 
-    val isInternetAvailable: Boolean
-        get() {
-            try {
-                val ipAddr = InetAddress.getByName("google.com")
-                Log.d("SafeIsolatorViewModel", "isInternetAvailable: ipAddr: ${ipAddr.hostAddress}")
-                return !ipAddr.equals("")
-            } catch (e: Exception) {
-                return false
+    suspend fun makeInternetCheckRequest(): Result<Unit> {
+        return withContext(Dispatchers.IO) {
+            val url = URL("https://google.com")
+            val conn = url.openConnection() as HttpURLConnection
+            conn.setRequestProperty("Cache-Control", "no-cache")
+            conn.defaultUseCaches = false
+            conn.useCaches = false
+            conn.runCatching {
+                requestMethod = "POST"
+                doInput = true
+                val byteArray = inputStream.readBytes()
+                if (byteArray.isEmpty()) {
+                    throw Exception("Empty byteArray in inputStream")
+                }
+                Log.d("makeInternetCheckRequest", String(bytes = byteArray, StandardCharsets.UTF_8))
+                return@runCatching
             }
         }
+    }
+
+    fun performAndScheduleInternetCheck() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                makeInternetCheckRequest()
+                Log.d("SafeIsolatorViewModel", "isInternetAvailable: true")
+                isInternetReachable = true
+            } catch (e: Exception) {
+                Log.d("SafeIsolatorViewModel", "isInternetAvailable: exception: $e")
+                isInternetReachable = false
+            }
+        }
+    }
 
     fun setupWorkProfile() {
 

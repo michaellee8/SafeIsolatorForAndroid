@@ -17,11 +17,7 @@ fun SafeIsolatorMainScreen(
     isInternetReachable: Boolean,
 ) {
     Column {
-        if (isInternetReachable) {
-            Text(text = "Internet is currently rechable.")
-        } else {
-            Text(text = "Blocking is working! Internet is not reachable.")
-        }
+        val isInstalledOnWorkProfile = true
         if (isInstalledOnWorkProfile) {
             Text(text = "Running in Work Profile.")
             Text(text = "1. Setup VPN.")
