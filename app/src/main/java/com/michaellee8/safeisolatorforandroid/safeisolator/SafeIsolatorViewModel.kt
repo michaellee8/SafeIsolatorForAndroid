@@ -20,6 +20,7 @@ import eu.faircode.netguard.ServiceSinkhole
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.typeblog.shelter.util.AuthenticationUtility
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets
@@ -125,17 +126,22 @@ class SafeIsolatorViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 makeInternetCheckRequest()
-                Log.d("SafeIsolatorViewModel", "isInternetAvailable: true")
+//                Log.d("SafeIsolatorViewModel", "isInternetAvailable: true")
                 isInternetReachable = true
             } catch (e: Exception) {
-                Log.d("SafeIsolatorViewModel", "isInternetAvailable: exception: $e")
+//                Log.d("SafeIsolatorViewModel", "isInternetAvailable: exception: $e")
                 isInternetReachable = false
             }
         }
     }
 
     fun setupWorkProfile() {
-
+        val policyManager = app.getSystemService(DevicePolicyManager::class.java)
+        if (!policyManager.isProvisioningAllowed(DevicePolicyManager.ACTION_PROVISION_MANAGED_PROFILE)) {
+            Log.d("Shelter", "Provision failed.")
+        }
+        AuthenticationUtility.reset()
+        activity.mProvisionProfile.launch(null)
     }
 
     fun navigateToAPKDownloadSite() {

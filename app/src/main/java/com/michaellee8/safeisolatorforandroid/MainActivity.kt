@@ -1,10 +1,15 @@
 package com.michaellee8.safeisolatorforandroid
 
+import android.app.admin.DevicePolicyManager
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
@@ -16,6 +21,9 @@ import com.michaellee8.safeisolatorforandroid.safeisolator.SafeIsolatorMainScree
 import com.michaellee8.safeisolatorforandroid.safeisolator.SafeIsolatorViewModel
 import com.michaellee8.safeisolatorforandroid.safeisolator.SafeIsolatorViewModelFactory
 import com.michaellee8.safeisolatorforandroid.ui.theme.SafeIsolatorForAndroidTheme
+import net.typeblog.shelter.receivers.ShelterDeviceAdminReceiver
+import net.typeblog.shelter.util.LocalStorageManager
+import net.typeblog.shelter.util.Utility
 
 class MainActivity : ComponentActivity() {
 
@@ -33,8 +41,12 @@ class MainActivity : ComponentActivity() {
         )
     }
 
+    private var mStorage: LocalStorageManager? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LocalStorageManager.initialize(applicationContext)
+        mStorage = LocalStorageManager.getInstance()
         setContent {
             SafeIsolatorForAndroidTheme {
                 // A surface container using the 'background' color from the theme
@@ -62,6 +74,45 @@ class MainActivity : ComponentActivity() {
             safeIsolatorViewModel.startVpn()
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    val mProvisionProfile =
+        registerForActivityResult(ProfileProvisionContract()
+        ) { result: Boolean? ->
+            this.setupProfileCb(result)
+        }
+
+
+    class ProfileProvisionContract() :
+        ActivityResultContract<Void?, Boolean?>() {
+
+        override fun createIntent(context: Context, input: Void?): Intent {
+            val admin = ComponentName(context.applicationContext,
+                ShelterDeviceAdminReceiver::class.java)
+            val intent = Intent(DevicePolicyManager.ACTION_PROVISION_MANAGED_PROFILE)
+            intent.putExtra(DevicePolicyManager.EXTRA_PROVISIONING_SKIP_ENCRYPTION, true)
+            intent.putExtra(DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME,
+                admin)
+            return intent
+        }
+
+        override fun parseResult(resultCode: Int, intent: Intent?): Boolean {
+            return resultCode == RESULT_OK
+        }
+    }
+
+    private fun setupProfileCb(result: Boolean?) {
+        if (result != null && result) {
+            if (Utility.isWorkProfileAvailable(this)) {
+                Log.d("SafeIsolatorMainActivity", "Work profile setup already done")
+                return
+            }
+
+            mStorage?.setBoolean(LocalStorageManager.PREF_IS_SETTING_UP, true)
+            Log.d("SafeIsolatorMainActivity", "Work profile setup success")
+        } else {
+            Log.d("SafeIsolatorMainActivity", "Work profile setup failed")
+        }
     }
 }
 

@@ -17,7 +17,6 @@ fun SafeIsolatorMainScreen(
     isInternetReachable: Boolean,
 ) {
     Column {
-        val isInstalledOnWorkProfile = true
         if (isInstalledOnWorkProfile) {
             Text(text = "Running in Work Profile.")
             Text(text = "1. Setup VPN.")
