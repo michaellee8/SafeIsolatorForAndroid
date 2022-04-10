@@ -44,6 +44,9 @@ fun SafeIsolatorMainScreen(
             Button(onClick = { setupWorkProfile() }) {
                 Text("Setup work profile")
             }
+            Button(onClick = { transferChromeToWorkProfile() }) {
+                Text(text = "Transfer Chrome to work profile")
+            }
             Button(onClick = { pickFileToTransferToWorkProfile() }) {
                 Text("Pick file to be transferred")
             }

@@ -28,7 +28,6 @@ import com.michaellee8.safeisolatorforandroid.safeisolator.SafeIsolatorMainScree
 import com.michaellee8.safeisolatorforandroid.safeisolator.SafeIsolatorViewModel
 import com.michaellee8.safeisolatorforandroid.safeisolator.SafeIsolatorViewModelFactory
 import com.michaellee8.safeisolatorforandroid.ui.theme.SafeIsolatorForAndroidTheme
-import net.typeblog.shelter.ShelterApplication
 import net.typeblog.shelter.receivers.ShelterDeviceAdminReceiver
 import net.typeblog.shelter.services.IAppInstallCallback
 import net.typeblog.shelter.services.IShelterService
@@ -159,7 +158,7 @@ class MainActivity : ComponentActivity() {
         // Bind to the service provided by this app in main user
         // The service in main profile doesn't need to be foreground
         // because this activity will hold a ServiceConnection to the service
-        (application as ShelterApplication).bindShelterService(object : ServiceConnection {
+        (application as SafeIsolatorAppliction).bindShelterService(object : ServiceConnection {
             override fun onServiceConnected(name: ComponentName, service: IBinder) {
                 mServiceMain = IShelterService.Stub.asInterface(service)
                 tryStartWorkService()
@@ -185,9 +184,10 @@ class MainActivity : ComponentActivity() {
             // which means that the work profile does not even exist
             // in the first place.
             mStorage!!.setBoolean(LocalStorageManager.PREF_HAS_SETUP, false)
-            Toast.makeText(this, getString(R.string.work_profile_not_found), Toast.LENGTH_LONG)
+            Toast.makeText(this,
+                "Work profile not found, please initialize first and then restart the app.",
+                Toast.LENGTH_LONG)
                 .show()
-            finish()
             return
         }
         mTryStartWorkService.launch(intent)
